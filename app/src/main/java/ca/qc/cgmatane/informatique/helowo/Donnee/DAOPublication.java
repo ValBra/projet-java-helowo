@@ -3,12 +3,16 @@ package ca.qc.cgmatane.informatique.helowo.Donnee;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.qc.cgmatane.informatique.helowo.modele.Publication;
 
 public class DAOPublication {
     private static DAOPublication instance = null;
     private BaseDeDonnee baseDeDonnees;
     //declarer ici une instance de la BD
+    private List<Publication> listePublications;
 
     public static DAOPublication getInstance(){
         if(null==instance){
@@ -19,6 +23,14 @@ public class DAOPublication {
 
     public DAOPublication(){
         this.baseDeDonnees = BaseDeDonnee.getInstance();
+        listePublications = new ArrayList<Publication>();
+    }
+
+    public Publication trouverPublication(int id_publi){
+        for(Publication publicationRecherche : this.listePublications){
+            if(publicationRecherche.getId() == id_publi) return publicationRecherche;
+        }
+        return null;
     }
 
     public void modifierPublication(Publication publication){
