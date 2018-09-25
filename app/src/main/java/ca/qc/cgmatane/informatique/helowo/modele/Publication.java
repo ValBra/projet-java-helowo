@@ -5,17 +5,14 @@ public class Publication {
     private String url_photo;
     private String description;
     private String lieu;
-    private int classement;
     //instance de likes
     //instance de comments
 
 
-    public Publication(int id, String url_photo, String description, String lieu, int classement) {
-        this.id = id;
+    public Publication(String url_photo, String description, String lieu) {
         this.url_photo = url_photo;
         this.description = description;
         this.lieu = lieu;
-        this.classement = classement;
     }
 
     public int getId() {
@@ -48,13 +45,5 @@ public class Publication {
 
     public void setLieu(String lieu) {
         this.lieu = lieu;
-    }
-
-    public int getClassement() {
-        return classement;
-    }
-
-    public void setClassement(int classement) {
-        this.classement = classement;
     }
 }
