@@ -9,6 +9,13 @@ public class Publication {
     //instance de comments
 
 
+    public Publication(int id, String url_photo, String description, String lieu) {
+        this.id = id;
+        this.url_photo = url_photo;
+        this.description = description;
+        this.lieu = lieu;
+    }
+
     public Publication(String url_photo, String description, String lieu) {
         this.url_photo = url_photo;
         this.description = description;
