@@ -3,6 +3,7 @@ package ca.qc.cgmatane.informatique.helowo.Vue;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,15 +14,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import ca.qc.cgmatane.informatique.helowo.Donnee.BaseDeDonnee;
+import ca.qc.cgmatane.informatique.helowo.Donnee.DAOPublication;
 import ca.qc.cgmatane.informatique.helowo.R;
 
 public class VueMur extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    protected DAOPublication accesseurHelowo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_mur);
+
+        Log.d("Helowo", "onCreate");
+
+        // Instance de la BDD
+        BaseDeDonnee.getInstance(getApplicationContext());
+        accesseurHelowo = DAOPublication.getInstance();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
