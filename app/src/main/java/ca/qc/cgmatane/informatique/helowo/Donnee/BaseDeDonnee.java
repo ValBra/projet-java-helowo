@@ -32,18 +32,18 @@ public class BaseDeDonnee extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         // Table test pour une première publication
-        String CREATE_TABLE = "create table table_test(id INTEGER PRIMARY KEY, nom_utilisateur TEXT, url_image TEXT, lieu TEXT, nb_like int)";
+        String CREATE_TABLE = "create table publications(id_publication INTEGER PRIMARY KEY, nom_utilisateur TEXT, description TEXT, url_image TEXT, lieu TEXT, nb_like int)";
         db.execSQL(CREATE_TABLE);
     }
 
     @Override
     public void onOpen(SQLiteDatabase db) {
 
-        String DELETE = "delete from table_test where 1 = 1";
+        String DELETE = "delete from publications where 1 = 1";
         db.execSQL(DELETE);
 
         // Données test pour une première publication
-        String INSERT_1 = "insert into table_test(nom_utilisateur, url_image, lieu, nb_like) VALUES('nom', 'D:\\Test\\matane1.png', 'Matane', 11)";
+        String INSERT_1 = "insert into publications(nom_utilisateur, description, url_image, lieu, nb_like) VALUES('nom', 'une photo', 'D:\\Test\\matane1.png', 'Matane', 11)";
 
         db.execSQL(INSERT_1);
 
@@ -52,7 +52,7 @@ public class BaseDeDonnee extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Table test pour une première publication
-        String CREATE_TABLE = "create table table_test(id INTEGER PRIMARY KEY, nom_utilisateur TEXT, url_image TEXT, lieu TEXT, nb_aime TEXT)";
+        String CREATE_TABLE = "create table publications(id INTEGER PRIMARY KEY, nom_utilisateur TEXT, description TEXT, url_image TEXT, lieu TEXT, nb_aime TEXT)";
         db.execSQL(CREATE_TABLE);
 
     }

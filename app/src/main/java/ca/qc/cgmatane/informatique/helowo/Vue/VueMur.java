@@ -13,6 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import java.util.HashMap;
+import java.util.List;
 
 import ca.qc.cgmatane.informatique.helowo.Donnee.BaseDeDonnee;
 import ca.qc.cgmatane.informatique.helowo.Donnee.DAOPublication;
@@ -21,6 +26,8 @@ import ca.qc.cgmatane.informatique.helowo.R;
 public class VueMur extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    protected ListView vueListePublication;
+    protected List<HashMap<String, String>> listePublicationPourAdapteur;
     protected DAOPublication accesseurHelowo;
 
     @Override
@@ -33,6 +40,8 @@ public class VueMur extends AppCompatActivity
         // Instance de la BDD
         BaseDeDonnee.getInstance(getApplicationContext());
         accesseurHelowo = DAOPublication.getInstance();
+
+        vueListePublication = (ListView)findViewById(R.id.ListView_test);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,6 +63,8 @@ public class VueMur extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        afficherPublication();
     }
 
     @Override
@@ -111,5 +122,18 @@ public class VueMur extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    protected void afficherPublication() {
+        listePublicationPourAdapteur = accesseurHelowo.recupererListePourAdapteur();
+
+        SimpleAdapter adapteur = new SimpleAdapter(
+                this,
+                listePublicationPourAdapteur,
+                android.R.layout.two_line_list_item,
+                new String[] {"nom_utilisateur","lieu"},
+                new int[] {android.R.id.text1, android.R.id.text2});
+
+        vueListePublication.setAdapter(adapteur);
     }
 }
