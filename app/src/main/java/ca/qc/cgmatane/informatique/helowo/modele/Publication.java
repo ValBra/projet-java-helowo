@@ -1,5 +1,7 @@
 package ca.qc.cgmatane.informatique.helowo.modele;
 
+import java.util.HashMap;
+
 public class Publication {
     private int id;
     private String url_photo;
@@ -52,5 +54,14 @@ public class Publication {
 
     public void setLieu(String lieu) {
         this.lieu = lieu;
+    }
+
+    public HashMap<String, String> obtenirPublicationPourAdapteur(){
+        HashMap<String, String> publicationPourAdapteur=new HashMap<String,String>();
+        publicationPourAdapteur.put("id_publication",""+this.getId());
+        publicationPourAdapteur.put("url_photo",this.getUrl_photo());
+        publicationPourAdapteur.put("description",this.getDescription());
+        publicationPourAdapteur.put("lieu",this.getLieu());
+        return publicationPourAdapteur;
     }
 }

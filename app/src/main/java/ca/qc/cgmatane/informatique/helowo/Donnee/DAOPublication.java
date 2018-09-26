@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.List;
 
 import ca.qc.cgmatane.informatique.helowo.modele.Publication;
@@ -73,5 +74,15 @@ public class DAOPublication {
         nouvellePublication.put("lieu",publication.getLieu());
         SQLiteDatabase baseDeDonnees = this.baseDeDonnees.getWritableDatabase();
         baseDeDonnees.insert("publication",null,nouvellePublication);
+    }
+
+    public List<HashMap<String, String>> recupererListePourAdapteur(){
+        List<HashMap<String, String>> listePourAdapteur;
+        listePourAdapteur = new ArrayList<HashMap<String, String>>();
+        listerPublications();
+        for(Publication publication:listePublications){
+            listePourAdapteur.add(publication.obtenirPublicationPourAdapteur());
+        }
+        return listePourAdapteur;
     }
 }
