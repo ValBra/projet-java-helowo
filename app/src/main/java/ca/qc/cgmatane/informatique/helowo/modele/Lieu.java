@@ -1,5 +1,7 @@
 package ca.qc.cgmatane.informatique.helowo.modele;
 
+import java.util.HashMap;
+
 public class Lieu {
     private int id;
     private String nom;
@@ -49,5 +51,14 @@ public class Lieu {
 
     public void setLatitude(float latitude) {
         this.latitude = latitude;
+    }
+
+    public HashMap<String, String> obtenirLieuPourAdapteur(){
+        HashMap<String, String> lieuPourAdapteur=new HashMap<String,String>();
+        lieuPourAdapteur.put("id_lieu",""+this.getId());
+        lieuPourAdapteur.put("nom",this.getNom());
+        lieuPourAdapteur.put("longitude",""+this.getLongitude());
+        lieuPourAdapteur.put("latitude",""+this.getLatitude());
+        return lieuPourAdapteur;
     }
 }
