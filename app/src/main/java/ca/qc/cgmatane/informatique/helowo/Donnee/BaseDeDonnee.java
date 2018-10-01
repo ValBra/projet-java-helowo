@@ -32,19 +32,19 @@ public class BaseDeDonnee extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         // Table test pour une première publication
-        String CREATE_TABLE = "create table publications(id_publication INTEGER PRIMARY KEY, nom_utilisateur TEXT, description TEXT, url_image TEXT, lieu TEXT, nb_like int)";
+        //String CREATE_TABLE = "create table publications(id_publication INTEGER PRIMARY KEY, nom_utilisateur TEXT, description TEXT, url_image TEXT, lieu TEXT, nb_like INTEGER)";
+        String CREATE_TABLE = "create table publications(id_publication INTEGER PRIMARY KEY, url_image TEXT, description TEXT, lieu TEXT)";
         db.execSQL(CREATE_TABLE);
     }
 
     @Override
     public void onOpen(SQLiteDatabase db) {
-
         String DELETE = "delete from publications where 1 = 1";
         db.execSQL(DELETE);
 
         // Données test pour une première publication
-        String INSERT_1 = "insert into publications(nom_utilisateur, description, url_image, lieu, nb_like) VALUES('nom', 'une photo', 'D:\\Test\\matane1.png', 'Matane', 11)";
-
+        //String INSERT_1 = "insert into publications(nom_utilisateur, description, url_image, lieu, nb_like) VALUES('nom', 'une photo', 'D:\\Test\\matane1.png', 'Matane', 11)";
+        String INSERT_1 = "insert into publications(url_image,description,lieu) VALUES('C:\\Users\\1801042\\Documents\\matane1.jpg','une photo','Matane')";
         db.execSQL(INSERT_1);
 
     }

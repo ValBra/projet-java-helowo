@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -65,7 +66,33 @@ public class VueMur extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
        // afficherPublication();
+
+        SimpleAdapter adapteur = new SimpleAdapter(
+                this,
+                listePublicationPourAdapteur,
+                //android.R.layout.two_line_list_item,
+                android.R.layout.expandable_list_content,
+                new String[]{"titre","description"},
+                new int[] {android.R.id.text1,android.R.id.text2});
+
+        vueListePublication.setAdapter(adapteur);
+
+        vueListePublication.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View vue, int positionItem, long id) {
+                        Log.d("ToDo","onItemClick");
+                        ListView vueListeToDo = (ListView)vue.getParent();
+
+                        HashMap<String,String> toDo =
+                                (HashMap<String,String>)
+                                        vueListeToDo.getItemAtPosition((int)positionItem);
+                    }
+                }
+        );
     }
+
+
 
     @Override
     public void onBackPressed() {
