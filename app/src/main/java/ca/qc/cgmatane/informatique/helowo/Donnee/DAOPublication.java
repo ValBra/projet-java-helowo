@@ -36,7 +36,7 @@ public class DAOPublication {
         Publication publication;
         int indexId_Publication=curseur.getColumnIndex("id_publication");
         int indexAuteur=curseur.getColumnIndex("auteur");
-        int indexUrlPhoto=curseur.getColumnIndex("url_photo");
+        int indexUrlPhoto=curseur.getColumnIndex("url_image");
         int indexDescription=curseur.getColumnIndex("description");
         int indexLieu=curseur.getColumnIndex("lieu");
 
@@ -61,7 +61,7 @@ public class DAOPublication {
 
     public void modifierPublication(Publication publication){
         ContentValues publicationModifiee = new ContentValues();
-        publicationModifiee.put("url_photo",publication.getUrl_photo());
+        publicationModifiee.put("url_image",publication.getUrl_photo());
         publicationModifiee.put("description",publication.getDescription());
         publicationModifiee.put("lieu",publication.getLieu());
         SQLiteDatabase baseDeDonnees = this.baseDeDonnees.getWritableDatabase();
@@ -70,7 +70,7 @@ public class DAOPublication {
 
     public void ajouterPublication(Publication publication){
         ContentValues nouvellePublication = new ContentValues();
-        nouvellePublication.put("url_photo",publication.getUrl_photo());
+        nouvellePublication.put("url_image",publication.getUrl_photo());
         nouvellePublication.put("description",publication.getDescription());
         nouvellePublication.put("lieu",publication.getLieu());
         SQLiteDatabase baseDeDonnees = this.baseDeDonnees.getWritableDatabase();

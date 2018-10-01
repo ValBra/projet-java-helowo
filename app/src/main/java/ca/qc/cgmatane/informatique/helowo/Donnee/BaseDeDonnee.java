@@ -52,10 +52,8 @@ public class BaseDeDonnee extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Table test pour une première publication
-        String CREATE_TABLE = "create table publications(id INTEGER PRIMARY KEY, auteur TEXT, url_image TEXT, description TEXT, lieu TEXT)";
+        String CREATE_TABLE = "create table publications(id_publication INTEGER PRIMARY KEY, auteur TEXT, url_image TEXT, description TEXT, lieu TEXT)";
         db.execSQL(CREATE_TABLE);
 
     }
-
-
 }

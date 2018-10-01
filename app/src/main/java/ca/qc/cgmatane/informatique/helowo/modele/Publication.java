@@ -71,7 +71,7 @@ public class Publication {
         HashMap<String, String> publicationPourAdapteur=new HashMap<String,String>();
         publicationPourAdapteur.put("id_publication",""+this.getId());
         publicationPourAdapteur.put("auteur",this.getAuteur());
-        publicationPourAdapteur.put("url_photo",this.getUrl_photo());
+        publicationPourAdapteur.put("url_image",this.getUrl_photo());
         publicationPourAdapteur.put("description",this.getDescription());
         publicationPourAdapteur.put("lieu",this.getLieu());
         return publicationPourAdapteur;

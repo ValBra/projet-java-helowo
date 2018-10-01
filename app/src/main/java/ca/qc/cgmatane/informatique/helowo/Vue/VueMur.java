@@ -32,6 +32,7 @@ public class VueMur extends AppCompatActivity
 
     protected ListView vueListePublication;
     protected List<HashMap<String, String>> listePublicationPourAdapteur;
+    protected DAOPublication accesseurPubli;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +41,20 @@ public class VueMur extends AppCompatActivity
 
         Log.d("Helowo", "onCreate");
 
-        vueListePublication = (ListView)findViewById(R.id.ListView_test);
-        //listePublicationPourAdapteur=new ArrayList<HashMap<String,String>>();
-        listePublicationPourAdapteur=preparerListePublis();
+        BaseDeDonnee.getInstance(getApplicationContext());
+        accesseurPubli=DAOPublication.getInstance();
 
-        SimpleAdapter adapteur = new SimpleAdapter(
+        vueListePublication = (ListView)findViewById(R.id.ListView_test);
+        afficherPublications();
+
+        /*SimpleAdapter adapteur = new SimpleAdapter(
                 this,
                 listePublicationPourAdapteur,
                 R.layout.vue_liste_publication,
                 new String[]{"auteur","url_photo","lieu"},
                 new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu});
 
-        vueListePublication.setAdapter(adapteur);
+        vueListePublication.setAdapter(adapteur);*/
 
         vueListePublication.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -89,7 +92,19 @@ public class VueMur extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public  List<HashMap<String,String>> preparerListePublis(){
+    public void afficherPublications(){
+        listePublicationPourAdapteur=accesseurPubli.recupererListePourAdapteur();
+        SimpleAdapter adapteur = new SimpleAdapter(
+                this,
+                listePublicationPourAdapteur,
+                R.layout.vue_liste_publication,
+                new String[]{"auteur","url_image","lieu"},
+                new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu});
+
+        vueListePublication.setAdapter(adapteur);
+    }
+
+    /*public  List<HashMap<String,String>> preparerListePublis(){
         List<HashMap<String,String>> listePublis = new ArrayList<HashMap<String,String>>();
         HashMap<String,String> publi;
 
@@ -108,7 +123,7 @@ public class VueMur extends AppCompatActivity
         listePublis.add(publi);
 
         return listePublis;
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
