@@ -7,18 +7,21 @@ public class Publication {
     private String url_photo;
     private String description;
     private String lieu;
+    private String auteur;
     //instance de likes
     //instance de comments
 
 
-    public Publication(int id, String url_photo, String description, String lieu) {
+    public Publication(int id, String auteur, String url_photo, String description, String lieu) {
         this.id = id;
+        this.auteur=auteur;
         this.url_photo = url_photo;
         this.description = description;
         this.lieu = lieu;
     }
 
-    public Publication(String url_photo, String description, String lieu) {
+    public Publication(String auteur,String url_photo, String description, String lieu) {
+        this.auteur=auteur;
         this.url_photo = url_photo;
         this.description = description;
         this.lieu = lieu;
@@ -56,9 +59,18 @@ public class Publication {
         this.lieu = lieu;
     }
 
+    public String getAuteur() {
+        return auteur;
+    }
+
+    public void setAuteur(String auteur) {
+        this.auteur = auteur;
+    }
+
     public HashMap<String, String> obtenirPublicationPourAdapteur(){
         HashMap<String, String> publicationPourAdapteur=new HashMap<String,String>();
         publicationPourAdapteur.put("id_publication",""+this.getId());
+        publicationPourAdapteur.put("auteur",this.getAuteur());
         publicationPourAdapteur.put("url_photo",this.getUrl_photo());
         publicationPourAdapteur.put("description",this.getDescription());
         publicationPourAdapteur.put("lieu",this.getLieu());

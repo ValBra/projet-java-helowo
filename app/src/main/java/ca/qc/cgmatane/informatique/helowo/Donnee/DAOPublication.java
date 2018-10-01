@@ -35,19 +35,20 @@ public class DAOPublication {
         this.listePublications.clear();
         Publication publication;
         int indexId_Publication=curseur.getColumnIndex("id_publication");
+        int indexAuteur=curseur.getColumnIndex("auteur");
         int indexUrlPhoto=curseur.getColumnIndex("url_photo");
         int indexDescription=curseur.getColumnIndex("description");
         int indexLieu=curseur.getColumnIndex("lieu");
 
         for (curseur.moveToFirst();!curseur.isAfterLast();curseur.moveToNext()){
             int id_publication=curseur.getInt(indexId_Publication);
+            String auteur=curseur.getString(indexAuteur);
             String urlPhoto=curseur.getString(indexUrlPhoto);
             String description=curseur.getString(indexDescription);
             String lieu=curseur.getString(indexLieu);
-            publication=new Publication(id_publication,urlPhoto,description,lieu);
+            publication=new Publication(id_publication,auteur,urlPhoto,description,lieu);
             this.listePublications.add(publication);
         }
-
         return listePublications;
     }
 
