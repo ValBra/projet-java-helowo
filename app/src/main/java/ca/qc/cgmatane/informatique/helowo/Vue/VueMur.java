@@ -1,5 +1,6 @@
 package ca.qc.cgmatane.informatique.helowo.Vue;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -33,6 +34,7 @@ public class VueMur extends AppCompatActivity
     protected ListView vueListePublication;
     protected List<HashMap<String, String>> listePublicationPourAdapteur;
     protected DAOPublication accesseurPubli;
+    public static final int ACTION_AJOUTER_PUBLICATION = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +47,27 @@ public class VueMur extends AppCompatActivity
         accesseurPubli=DAOPublication.getInstance();
 
         vueListePublication = (ListView)findViewById(R.id.ListView_test);
-        afficherPublications();
+        listePublicationPourAdapteur=preparerListePublis();
+        //afficherPublications();
 
-        /*SimpleAdapter adapteur = new SimpleAdapter(
+        SimpleAdapter adapteur = new SimpleAdapter(
                 this,
                 listePublicationPourAdapteur,
                 R.layout.vue_liste_publication,
                 new String[]{"auteur","url_photo","lieu"},
                 new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu});
 
-        vueListePublication.setAdapter(adapteur);*/
+        vueListePublication.setAdapter(adapteur);
 
         vueListePublication.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View vue, int positionItem, long id) {
-                        Log.d("ToDo","onItemClick");
-                        ListView vueListeToDo = (ListView)vue.getParent();
+                        ListView vueListePubli = (ListView)vue.getParent();
 
-                        HashMap<String,String> toDo =
+                        HashMap<String,String> publi =
                                 (HashMap<String,String>)
-                                        vueListeToDo.getItemAtPosition((int)positionItem);
+                                        vueListePubli.getItemAtPosition((int)positionItem);
                     }
                 }
         );
@@ -77,8 +79,11 @@ public class VueMur extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(VueMur.this,AjouterPublication.class);
+                startActivityForResult(intent, ACTION_AJOUTER_PUBLICATION);
+                //startActivity(intent);
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 
@@ -98,32 +103,42 @@ public class VueMur extends AppCompatActivity
                 this,
                 listePublicationPourAdapteur,
                 R.layout.vue_liste_publication,
-                new String[]{"auteur","url_image","lieu"},
+                new String[]{"auteur","url_photo","lieu"},
                 new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu});
 
         vueListePublication.setAdapter(adapteur);
     }
 
-    /*public  List<HashMap<String,String>> preparerListePublis(){
+    protected void onActivityResult(int activite,int resultat,Intent donnees){
+        switch (activite){
+            case ACTION_AJOUTER_PUBLICATION:
+                afficherPublications();
+                break;
+        }
+    }
+
+    public  List<HashMap<String,String>> preparerListePublis(){
         List<HashMap<String,String>> listePublis = new ArrayList<HashMap<String,String>>();
         HashMap<String,String> publi;
 
         publi= new HashMap<String, String>();
         publi.put("auteur","ValBra");
         publi.put("url_photo","C:\\Users\\1801042\\Documents\\matane1.jpg");
+        publi.put("description","Matane");
         publi.put("lieu","Matane");
-        publi.put("nb_likes","20");
+        //publi.put("nb_likes","20");
         listePublis.add(publi);
 
         publi = new HashMap<String, String>();
         publi.put("auteur","ValBra2");
         publi.put("url_photo","C:\\Users\\1801042\\Documents\\matane1.jpg");
+        publi.put("description","Matane");
         publi.put("lieu","Matane");
-        publi.put("nb_likes","1560");
+        //publi.put("nb_likes","1560");
         listePublis.add(publi);
 
         return listePublis;
-    }*/
+    }
 
     @Override
     public void onBackPressed() {

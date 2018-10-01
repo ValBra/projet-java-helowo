@@ -68,7 +68,7 @@ public class AjouterPublication extends AppCompatActivity {
     private void ajouterPublication(){
         String url=imageUrl.toString();
         Publication publication = new Publication("Auteur",url,description.getText().toString(),lieu.getText().toString());
-        accesseurPublication.ajouterPublication(publication);
+        accesseurPublication.ajouterPublication(publication); //Probleme ici. Pourrait être du à l'url
         naviguerRetourListe();
     }
 
