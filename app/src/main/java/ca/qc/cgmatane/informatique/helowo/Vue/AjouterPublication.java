@@ -83,6 +83,7 @@ public class AjouterPublication extends AppCompatActivity {
         if(requestCode == CAMERA_PIC_REQUEST){
             imageUrl=data.getData();
             imageView.setImageURI(imageUrl);
+            //This is a test
         }
     }
 
