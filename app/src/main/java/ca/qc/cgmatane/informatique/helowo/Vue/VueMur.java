@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,7 +60,7 @@ public class VueMur extends AppCompatActivity
                 listePublicationPourAdapteur,
                 R.layout.vue_liste_publication,
                 new String[]{"auteur","url_image","lieu"},
-                new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu});
+                new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu1});
 
         vueListePublication.setAdapter(adapteur);*/
 
@@ -101,6 +102,20 @@ public class VueMur extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    public void handleOnClick(View view)
+    {
+        switch(view.getId())
+        {
+            case R.id.lieu1:
+                //Lancer la vue Google Maps
+                Snackbar.make(view, "Vous avez cliqué sur le lieu", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                break;
+            default:
+                break;
+        }
+    }
+
     public void afficherPublications(){
         listePublicationPourAdapteur=accesseurPubli.recupererListePourAdapteur();
         SimpleAdapter adapteur = new SimpleAdapter(
@@ -108,7 +123,7 @@ public class VueMur extends AppCompatActivity
                 listePublicationPourAdapteur,
                 R.layout.vue_liste_publication,
                 new String[]{"auteur","url_image","lieu"},
-                new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu});
+                new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu1});
 
         vueListePublication.setAdapter(adapteur);
     }

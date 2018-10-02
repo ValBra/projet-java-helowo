@@ -30,7 +30,7 @@
         />
 
     <TextView
-        android:id="@+id/lieu"
+        android:id="@+id/lieu1"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginStart="6dp"
@@ -38,6 +38,8 @@
         android:layout_marginTop="220dp"
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
+        android:onClick="handleOnClick"
+        android:clickable="true"
         android:text="Lieu" />
 
     <ImageButton
