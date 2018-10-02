@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -32,6 +33,7 @@ public class VueMur extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected ListView vueListePublication;
+    protected ImageView imageView;
     protected List<HashMap<String, String>> listePublicationPourAdapteur;
     protected DAOPublication accesseurPubli;
     public static final int ACTION_AJOUTER_PUBLICATION = 0;
@@ -47,17 +49,19 @@ public class VueMur extends AppCompatActivity
         accesseurPubli=DAOPublication.getInstance();
 
         vueListePublication = (ListView)findViewById(R.id.ListView_test);
-        listePublicationPourAdapteur=preparerListePublis();
-        //afficherPublications();
+        imageView = (ImageView) findViewById(R.id.image);
 
-        SimpleAdapter adapteur = new SimpleAdapter(
+        //listePublicationPourAdapteur=preparerListePublis();
+        afficherPublications();
+
+        /*SimpleAdapter adapteur = new SimpleAdapter(
                 this,
                 listePublicationPourAdapteur,
                 R.layout.vue_liste_publication,
-                new String[]{"auteur","url_photo","lieu"},
+                new String[]{"auteur","url_image","lieu"},
                 new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu});
 
-        vueListePublication.setAdapter(adapteur);
+        vueListePublication.setAdapter(adapteur);*/
 
         vueListePublication.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -103,7 +107,7 @@ public class VueMur extends AppCompatActivity
                 this,
                 listePublicationPourAdapteur,
                 R.layout.vue_liste_publication,
-                new String[]{"auteur","url_photo","lieu"},
+                new String[]{"auteur","url_image","lieu"},
                 new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu});
 
         vueListePublication.setAdapter(adapteur);
@@ -123,7 +127,7 @@ public class VueMur extends AppCompatActivity
 
         publi= new HashMap<String, String>();
         publi.put("auteur","ValBra");
-        publi.put("url_photo","C:\\Users\\1801042\\Documents\\matane1.jpg");
+        publi.put("url_image","C:\\Users\\1801042\\Documents\\matane1.jpg");
         publi.put("description","Matane");
         publi.put("lieu","Matane");
         //publi.put("nb_likes","20");
@@ -131,7 +135,7 @@ public class VueMur extends AppCompatActivity
 
         publi = new HashMap<String, String>();
         publi.put("auteur","ValBra2");
-        publi.put("url_photo","C:\\Users\\1801042\\Documents\\matane1.jpg");
+        publi.put("url_image","C:\\Users\\1801042\\Documents\\matane1.jpg");
         publi.put("description","Matane");
         publi.put("lieu","Matane");
         //publi.put("nb_likes","1560");

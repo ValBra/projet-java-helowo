@@ -8,14 +8,12 @@ public class BaseDeDonnee extends SQLiteOpenHelper {
 
     private static BaseDeDonnee instance = null;
 
-    public static BaseDeDonnee getInstance(Context contexte)
-    {
+    public static BaseDeDonnee getInstance(Context contexte) {
         if(null == instance) instance = new BaseDeDonnee(contexte);
         return instance;
     }
 
-    public static BaseDeDonnee getInstance()
-    {
+    public static BaseDeDonnee getInstance() {
         return instance;
     }
 
@@ -43,8 +41,8 @@ public class BaseDeDonnee extends SQLiteOpenHelper {
         db.execSQL(DELETE);
 
         // Données test pour une première publication
-        //String INSERT_1 = "insert into publications(auteur,url_image,description,lieu) VALUES('ValBra','C:\\Users\\1801042\\Documents\\matane1.jpg','une photo','Matane')";
-        String INSERT_1 = "insert into publications(auteur,url_image,description,lieu) VALUES('ValBra','default','une photo','Matane')";
+        String INSERT_1 = "insert into publications(auteur,url_image,description,lieu) VALUES('ValBra','C:\\Users\\1801042\\Documents\\matane1.jpg','une photo','Matane, QC')";
+        //String INSERT_1 = "insert into publications(auteur,url_image,description,lieu) VALUES('ValBra','default','une photo','Matane, QC')";
         db.execSQL(INSERT_1);
 
     }
