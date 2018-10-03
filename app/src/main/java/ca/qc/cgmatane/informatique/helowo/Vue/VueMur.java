@@ -52,17 +52,17 @@ public class VueMur extends AppCompatActivity
         vueListePublication = (ListView)findViewById(R.id.ListView_test);
         imageView = (ImageView) findViewById(R.id.image);
 
-        //listePublicationPourAdapteur=preparerListePublis();
-        afficherPublications();
+        listePublicationPourAdapteur=preparerListePublis();
+        //afficherPublications();
 
-        /*SimpleAdapter adapteur = new SimpleAdapter(
+        SimpleAdapter adapteur = new SimpleAdapter(
                 this,
                 listePublicationPourAdapteur,
                 R.layout.vue_liste_publication,
                 new String[]{"auteur","url_image","lieu"},
                 new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu1});
 
-        vueListePublication.setAdapter(adapteur);*/
+        vueListePublication.setAdapter(adapteur);
 
         vueListePublication.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -110,6 +110,8 @@ public class VueMur extends AppCompatActivity
                 //Lancer la vue Google Maps
                 Snackbar.make(view, "Vous avez cliqué sur le lieu", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent intent = new Intent(VueMur.this,VueCarte.class);
+                startActivity(intent);
                 break;
             default:
                 break;
