@@ -7,6 +7,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -39,6 +41,8 @@ public class VueMur extends AppCompatActivity
     protected DAOPublication accesseurPubli;
     public static final int ACTION_AJOUTER_PUBLICATION = 0;
     SwipeRefreshLayout swipeLayout;
+    private ScaleGestureDetector mScaleGestureDetector;
+    private float mScaleFactor = 1.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class VueMur extends AppCompatActivity
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(getApplicationContext(), "Rafraichissement de la page", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Rafraichissement avec gesture Scroll", Toast.LENGTH_LONG).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override public void run() {
                         swipeLayout.setRefreshing(false);
@@ -73,6 +77,7 @@ public class VueMur extends AppCompatActivity
 
         vueListePublication = (ListView)findViewById(R.id.ListView_test);
         imageView = (ImageView) findViewById(R.id.image);
+        mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
         //listePublicationPourAdapteur=preparerListePublis();
         afficherPublications();
@@ -238,5 +243,23 @@ public class VueMur extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        mScaleGestureDetector.onTouchEvent(motionEvent);
+        return true;
+    }
+
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        @Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector){
+            mScaleFactor *= scaleGestureDetector.getScaleFactor();
+            mScaleFactor = Math.max(0.1f,
+                    Math.min(mScaleFactor, 10.0f));
+            imageView.setScaleX(mScaleFactor);
+            imageView.setScaleY(mScaleFactor);
+            Toast.makeText(getApplicationContext(), "Zoom avec gesture Pinch", Toast.LENGTH_LONG).show();
+            return true;
+        }
     }
 }
