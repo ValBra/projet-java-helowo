@@ -1,4 +1,4 @@
-package ca.qc.cgmatane.informatique.helowo.Vue;
+package ca.qc.cgmatane.informatique.helowo.vue;
 
 import android.content.Intent;
 import android.net.Uri;

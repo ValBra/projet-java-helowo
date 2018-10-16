@@ -1,4 +1,4 @@
-package ca.qc.cgmatane.informatique.helowo.Vue;
+package ca.qc.cgmatane.informatique.helowo.vue;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;

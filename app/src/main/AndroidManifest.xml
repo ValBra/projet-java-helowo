@@ -3,6 +3,7 @@
     package="ca.qc.cgmatane.informatique.helowo">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!--
         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -10,6 +11,7 @@
         location permissions for the 'MyLocation' functionality.
    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -32,7 +34,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Vue.VueMur"
+            android:name=".vue.VueMur"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -41,9 +43,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vue.AjouterPublication" />
+        <activity android:name=".vue.AjouterPublication" />
         <activity
-            android:name=".Vue.VueCarte"
+            android:name=".vue.VueCarte"
             android:label="@string/title_activity_vue_carte"></activity>
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
