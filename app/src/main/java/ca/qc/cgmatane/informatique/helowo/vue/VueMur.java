@@ -1,6 +1,10 @@
 package ca.qc.cgmatane.informatique.helowo.vue;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -135,10 +140,26 @@ public class VueMur extends AppCompatActivity
         {
             case R.id.lieu1:
                 //Lancer la vue Google Maps
-                Snackbar.make(view, "Vous avez cliqué sur le lieu", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Toast.makeText(getApplicationContext(), "Changement de page avec gesture Tap/Affichage vue Google Maps", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(VueMur.this,VueCarte.class);
                 startActivity(intent);
+                break;
+            case R.id.like1:
+                Toast.makeText(getApplicationContext(), "Envoi d'une notification lorsqu'une publication est aiméee", Toast.LENGTH_LONG).show();
+                NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                if (Build.VERSION.SDK_INT < 16) {
+                    Notification notify=new Notification.Builder
+                            (getApplicationContext()).setContentTitle("Publication likée").setContentText("La publication a été likée").
+                            setContentTitle("Publication likée").setSmallIcon(R.drawable.coeur).getNotification();
+                    notify.flags |= Notification.FLAG_AUTO_CANCEL;
+                    notif.notify(0, notify);
+                }else{
+                    Notification notify=new Notification.Builder
+                            (getApplicationContext()).setContentTitle("Publication likée").setContentText("La publication a été likée").
+                            setContentTitle("Publication likée").setSmallIcon(R.drawable.coeur).build();
+                    notify.flags |= Notification.FLAG_AUTO_CANCEL;
+                    notif.notify(0, notify);
+                }
                 break;
             default:
                 break;
@@ -247,6 +268,7 @@ public class VueMur extends AppCompatActivity
 
     public boolean onTouchEvent(MotionEvent motionEvent) {
         mScaleGestureDetector.onTouchEvent(motionEvent);
+        Toast.makeText(getApplicationContext(), "Tentative de zoom avec gesture Pinch", Toast.LENGTH_LONG).show();
         return true;
     }
 
@@ -258,7 +280,6 @@ public class VueMur extends AppCompatActivity
                     Math.min(mScaleFactor, 10.0f));
             imageView.setScaleX(mScaleFactor);
             imageView.setScaleY(mScaleFactor);
-            Toast.makeText(getApplicationContext(), "Zoom avec gesture Pinch", Toast.LENGTH_LONG).show();
             return true;
         }
     }
