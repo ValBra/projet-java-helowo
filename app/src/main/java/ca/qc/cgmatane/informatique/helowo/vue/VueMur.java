@@ -1,6 +1,7 @@
 package ca.qc.cgmatane.informatique.helowo.vue;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -45,6 +48,7 @@ public class VueMur extends AppCompatActivity
     protected List<HashMap<String, String>> listePublicationPourAdapteur;
     protected DAOPublication accesseurPubli;
     public static final int ACTION_AJOUTER_PUBLICATION = 0;
+    public static final String CHANNEL_ID = "1";
     SwipeRefreshLayout swipeLayout;
     private ScaleGestureDetector mScaleGestureDetector;
     private float mScaleFactor = 1.0f;
@@ -53,6 +57,8 @@ public class VueMur extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_mur);
+
+        createNotificationChannel();
 
         swipeLayout = findViewById(R.id.swipeContainer);
 
@@ -138,28 +144,33 @@ public class VueMur extends AppCompatActivity
     {
         switch(view.getId())
         {
+            case R.id.like1:
+                Log.d("Helowo", "clic like1");
+                Toast.makeText(getApplicationContext(), "Envoi d'une notification lorsqu'une publication est aimée", Toast.LENGTH_LONG).show();
+                //NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                //if (Build.VERSION.SDK_INT < 16) {
+                    //notify.flags |= Notification.FLAG_AUTO_CANCEL;
+                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.coeur)
+                        .setContentTitle("Publication likée")
+                        .setContentText("La publication a été likée")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                    notificationManager.notify(0, mBuilder.build());
+                //}else{
+                    /*Notification notify=new Notification.Builder
+                            (getApplicationContext()).setContentTitle("Publication likée").setContentText("La publication a été likée").
+                            setContentTitle("Publication likée").setSmallIcon(R.drawable.coeur).build();
+                    //notify.flags |= Notification.FLAG_AUTO_CANCEL;
+                    notif.notify(0, notify);*/
+                //}
+                break;
             case R.id.lieu1:
                 //Lancer la vue Google Maps
+                Log.d("Helowo", "clic Maps");
                 Toast.makeText(getApplicationContext(), "Changement de page avec gesture Tap/Affichage vue Google Maps", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(VueMur.this,VueCarte.class);
                 startActivity(intent);
-                break;
-            case R.id.like1:
-                Toast.makeText(getApplicationContext(), "Envoi d'une notification lorsqu'une publication est aiméee", Toast.LENGTH_LONG).show();
-                NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                if (Build.VERSION.SDK_INT < 16) {
-                    Notification notify=new Notification.Builder
-                            (getApplicationContext()).setContentTitle("Publication likée").setContentText("La publication a été likée").
-                            setContentTitle("Publication likée").setSmallIcon(R.drawable.coeur).getNotification();
-                    notify.flags |= Notification.FLAG_AUTO_CANCEL;
-                    notif.notify(0, notify);
-                }else{
-                    Notification notify=new Notification.Builder
-                            (getApplicationContext()).setContentTitle("Publication likée").setContentText("La publication a été likée").
-                            setContentTitle("Publication likée").setSmallIcon(R.drawable.coeur).build();
-                    notify.flags |= Notification.FLAG_AUTO_CANCEL;
-                    notif.notify(0, notify);
-                }
                 break;
             default:
                 break;
@@ -281,6 +292,22 @@ public class VueMur extends AppCompatActivity
             imageView.setScaleX(mScaleFactor);
             imageView.setScaleY(mScaleFactor);
             return true;
+        }
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }

@@ -50,6 +50,7 @@
         android:layout_marginStart="325dp"
         android:layout_marginLeft="325dp"
         android:src="@drawable/coeur"
+        android:onClick="handleOnClick"
         />
 
     <TextView
