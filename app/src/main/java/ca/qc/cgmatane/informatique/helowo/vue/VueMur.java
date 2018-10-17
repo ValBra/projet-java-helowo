@@ -5,15 +5,19 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -29,10 +33,14 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +62,8 @@ public class VueMur extends AppCompatActivity
     private ScaleGestureDetector mScaleGestureDetector;
     private float mScaleFactor = 1.0f;
     protected TextView nbLike;
+
+    View vue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +99,21 @@ public class VueMur extends AppCompatActivity
         accesseurPubli=DAOPublication.getInstance();
 
         vueListePublication = (ListView)findViewById(R.id.ListView_test);
-        imageView = (ImageView) findViewById(R.id.image);
+
+
+        /*File dossierImage= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        Uri file= Uri.fromFile(new File(dossierImage,"matane1.png"));*/
+
+        /*if(file.toString() != null && file.toString().length()>0)
+        {
+            Picasso.get().load("https://i.imgur.com/11izGY2.jpg").into(imageView);
+        }
+        else
+        {
+            Toast.makeText(VueMur.this, "Empty URI", Toast.LENGTH_SHORT).show();
+        }*/
+
+
         nbLike = (TextView) findViewById(R.id.nbLikes);
         mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
@@ -177,6 +201,14 @@ public class VueMur extends AppCompatActivity
                 R.layout.vue_liste_publication,
                 new String[]{"auteur","url_image","lieu"},
                 new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu1});
+
+
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        vue = inflater.inflate(R.layout.vue_liste_publication, null);
+        imageView = (ImageView) vue.findViewById(R.id.image);
+
+        //setContentView(R.layout.vue_liste_publication);
+        Picasso.get().load("https://i.imgur.com/11izGY2.jpg").into(imageView);
 
         vueListePublication.setAdapter(adapteur);
     }
