@@ -30,6 +30,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class VueMur extends AppCompatActivity
     SwipeRefreshLayout swipeLayout;
     private ScaleGestureDetector mScaleGestureDetector;
     private float mScaleFactor = 1.0f;
+    protected TextView nbLike;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,7 @@ public class VueMur extends AppCompatActivity
 
         vueListePublication = (ListView)findViewById(R.id.ListView_test);
         imageView = (ImageView) findViewById(R.id.image);
+        nbLike = (TextView) findViewById(R.id.nbLikes);
         mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
         //listePublicationPourAdapteur=preparerListePublis();
@@ -145,25 +148,14 @@ public class VueMur extends AppCompatActivity
         switch(view.getId())
         {
             case R.id.like1:
-                Log.d("Helowo", "clic like1");
                 Toast.makeText(getApplicationContext(), "Envoi d'une notification lorsqu'une publication est aimée", Toast.LENGTH_LONG).show();
-                //NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                //if (Build.VERSION.SDK_INT < 16) {
-                    //notify.flags |= Notification.FLAG_AUTO_CANCEL;
-                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.coeur)
                         .setContentTitle("Publication likée")
                         .setContentText("La publication a été likée")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-                    notificationManager.notify(0, mBuilder.build());
-                //}else{
-                    /*Notification notify=new Notification.Builder
-                            (getApplicationContext()).setContentTitle("Publication likée").setContentText("La publication a été likée").
-                            setContentTitle("Publication likée").setSmallIcon(R.drawable.coeur).build();
-                    //notify.flags |= Notification.FLAG_AUTO_CANCEL;
-                    notif.notify(0, notify);*/
-                //}
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                notificationManager.notify(0, mBuilder.build());
                 break;
             case R.id.lieu1:
                 //Lancer la vue Google Maps
