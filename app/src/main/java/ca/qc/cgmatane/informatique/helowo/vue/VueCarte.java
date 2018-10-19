@@ -1,5 +1,11 @@
 package ca.qc.cgmatane.informatique.helowo.vue;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,9 +48,27 @@ public class VueCarte extends FragmentActivity implements OnMapReadyCallback {
         Log.d("Helowo", "onMapReady");
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //AF:19:C1:9E:59:02:AE:16:D3:4B:52:B5:C9:17:AD:CE:52:F8:B7:2D
+
+        LatLng matane = new LatLng(48.840, -67.497);
+        mMap.addMarker(new MarkerOptions().position(matane).title("Marker in Matane"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(matane));
+        /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},1000);
+        }else {
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            try{
+                LatLng geoloc = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(geoloc).title("Lieu de la publication"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(geoloc));
+            }catch (Exception e){
+                e.printStackTrace();
+                Log.d("Helowo", "dans le catch");
+                LatLng matane = new LatLng(48.840, -67.497);
+                mMap.addMarker(new MarkerOptions().position(matane).title("Marker in Matane"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(matane));
+            }
+        }*/
     }
 }
