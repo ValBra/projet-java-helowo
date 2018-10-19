@@ -38,7 +38,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -208,7 +208,7 @@ public class VueMur extends AppCompatActivity
         imageView = (ImageView) vue.findViewById(R.id.image);
 
         //setContentView(R.layout.vue_liste_publication);
-        Picasso.get().load("https://i.imgur.com/11izGY2.jpg").into(imageView);
+        //Picasso.get().load("https://i.imgur.com/11izGY2.jpg").into(imageView);
 
         vueListePublication.setAdapter(adapteur);
     }
