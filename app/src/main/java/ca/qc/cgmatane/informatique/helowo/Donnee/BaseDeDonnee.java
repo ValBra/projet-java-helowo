@@ -31,8 +31,10 @@ public class BaseDeDonnee extends SQLiteOpenHelper {
 
         // Table test pour une première publication
         //String CREATE_TABLE = "create table publications(id_publication INTEGER PRIMARY KEY, nom_utilisateur TEXT, description TEXT, url_image TEXT, lieu TEXT, nb_like INTEGER)";
-        String CREATE_TABLE = "create table publications(id_publication INTEGER PRIMARY KEY, auteur TEXT, url_image TEXT, description TEXT, lieu TEXT)";
-        db.execSQL(CREATE_TABLE);
+        String CREATE_TABLE_PUBLI = "create table publications(id_publication INTEGER PRIMARY KEY, auteur TEXT, url_image TEXT, description TEXT, lieu TEXT)";
+        String CREATE_TABLE_MEMBRES = "create table membres(id_utilisateur INTEGER PRIMARY KEY, pseudo TEXT, mdp TEXT)";
+        db.execSQL(CREATE_TABLE_PUBLI);
+        db.execSQL(CREATE_TABLE_MEMBRES);
     }
 
     @Override
@@ -42,16 +44,20 @@ public class BaseDeDonnee extends SQLiteOpenHelper {
 
         // Données test pour une première publication
         String INSERT_1 = "insert into publications(auteur,url_image,description,lieu) VALUES('ValBra','https://i.imgur.com/11izGY2.jpg','une photo','Matane, QC')";
+        String INSERT_2 = "insert into membres(pseudo, mdp) VALUES('ValBra', 'Test')";
         //String INSERT_1 = "insert into publications(auteur,url_image,description,lieu) VALUES('ValBra','default','une photo','Matane, QC')";
         db.execSQL(INSERT_1);
+        db.execSQL(INSERT_2);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Table test pour une première publication
-        String CREATE_TABLE = "create table publications(id_publication INTEGER PRIMARY KEY, auteur TEXT, url_image TEXT, description TEXT, lieu TEXT)";
-        db.execSQL(CREATE_TABLE);
+        String CREATE_TABLE_PUBLICATION = "create table publications(id_publication INTEGER PRIMARY KEY, auteur TEXT, url_image TEXT, description TEXT, lieu TEXT)";
+        String CREATE_TABLE_MEMBRES = "create table membres(id_utilisateur INTEGER PRIMARY KEY, pseudo TEXT, mdp TEXT)";
+        db.execSQL(CREATE_TABLE_PUBLICATION);
+        db.execSQL(CREATE_TABLE_MEMBRES);
 
     }
 }

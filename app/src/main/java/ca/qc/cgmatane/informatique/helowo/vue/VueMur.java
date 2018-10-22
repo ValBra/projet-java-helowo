@@ -1,21 +1,16 @@
 package ca.qc.cgmatane.informatique.helowo.vue;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,17 +25,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -99,19 +91,6 @@ public class VueMur extends AppCompatActivity
         accesseurPubli=DAOPublication.getInstance();
 
         vueListePublication = (ListView)findViewById(R.id.ListView_test);
-
-
-        /*File dossierImage= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        Uri file= Uri.fromFile(new File(dossierImage,"matane1.png"));*/
-
-        /*if(file.toString() != null && file.toString().length()>0)
-        {
-            Picasso.get().load("https://i.imgur.com/11izGY2.jpg").into(imageView);
-        }
-        else
-        {
-            Toast.makeText(VueMur.this, "Empty URI", Toast.LENGTH_SHORT).show();
-        }*/
 
 
         nbLike = (TextView) findViewById(R.id.nbLikes);
@@ -203,6 +182,15 @@ public class VueMur extends AppCompatActivity
                 new int[] {R.id.pseudoAuteur,R.id.image,R.id.lieu1});
 
 
+
+        /*LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        vue = inflater.inflate(R.layout.vue_liste_publication, null);
+        imageView = (ImageView) vue.findViewById(R.id.image);*/
+
+        //setContentView(R.layout.vue_liste_publication);
+        //Picasso.get().load("https://i.imgur.com/11izGY2.jpg").into(imageView);
+
+
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         vue = inflater.inflate(R.layout.vue_liste_publication, null);
         imageView = (ImageView) vue.findViewById(R.id.image);
@@ -221,13 +209,25 @@ public class VueMur extends AppCompatActivity
         }
     }
 
-    public  List<HashMap<String,String>> preparerListePublis(){
+    public  List<HashMap<String,String>> preparerListePublis() {
         List<HashMap<String,String>> listePublis = new ArrayList<HashMap<String,String>>();
         HashMap<String,String> publi;
 
+        /*String url_1 = "https://i.imgur.com/11izGY2.jpg";
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        vue = inflater.inflate(R.layout.vue_mur, null);
+        imageView = (ImageView) vue.findViewById(R.id.image);*/
+
+        //setContentView(R.layout.vue_mur);
+
+        //Picasso.get().load(url_1).placeholder(R.drawable.matane1).into(imageView);
+
+        //setContentView(R.layout.vue_liste_publication);
+        //Picasso.get().load("g").into(imageView);
+
         publi= new HashMap<String, String>();
         publi.put("auteur","ValBra");
-        publi.put("url_image","C:\\Users\\1801042\\Documents\\matane1.jpg");
+        publi.put("url_image","https://i.imgur.com/11izGY2.jpg");
         publi.put("description","Matane");
         publi.put("lieu","Matane");
         //publi.put("nb_likes","20");
@@ -235,7 +235,7 @@ public class VueMur extends AppCompatActivity
 
         publi = new HashMap<String, String>();
         publi.put("auteur","ValBra2");
-        publi.put("url_image","C:\\Users\\1801042\\Documents\\matane1.jpg");
+        publi.put("url_image","https://i.imgur.com/11izGY2.jpg");
         publi.put("description","Matane");
         publi.put("lieu","Matane");
         //publi.put("nb_likes","1560");
@@ -283,13 +283,8 @@ public class VueMur extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+            Intent intent = new Intent(this, VueProfile.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
