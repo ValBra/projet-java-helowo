@@ -10,4 +10,10 @@
     <string name="title_activity_vue_carte">Map</string>
     <string name="channel_name">Channel 1</string>
     <string name="channel_description">Channel 1</string>
+    <string name="title_activity_tabbed_mur">TabbedMur</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_vue_profile">VueProfile</string>
 </resources>

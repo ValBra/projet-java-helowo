@@ -41,7 +41,7 @@ public class BaseDeDonnee extends SQLiteOpenHelper {
         db.execSQL(DELETE);
 
         // Données test pour une première publication
-        String INSERT_1 = "insert into publications(auteur,url_image,description,lieu) VALUES('ValBra','C:\\Users\\1801042\\Documents\\matane1.jpg','une photo','Matane, QC')";
+        String INSERT_1 = "insert into publications(auteur,url_image,description,lieu) VALUES('ValBra','https://i.imgur.com/11izGY2.jpg','une photo','Matane, QC')";
         //String INSERT_1 = "insert into publications(auteur,url_image,description,lieu) VALUES('ValBra','default','une photo','Matane, QC')";
         db.execSQL(INSERT_1);
 
