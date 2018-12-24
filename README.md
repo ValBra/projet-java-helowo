@@ -7,4 +7,5 @@ Android app for sharing geolocated photos.
 Study project carried out as part of the 5th computer science session at CEGEP of Matane, fall 2018.
 
 Vidéo de démonstration / Demo: https://www.youtube.com/watch?v=pHnlVOjsG68
+
 Note / Grade: 29/30
